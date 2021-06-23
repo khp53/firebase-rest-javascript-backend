@@ -1,0 +1,104 @@
+### Use this file to test out your REST call before implementing them in the code
+
+# Local JSON-Server ### Change the IP address below to your PC's IP address. Remain the port number 3000 unchanged # @baseUrl = http://192.168.0.5:3000
+
+# @baseUrl = http://localhost:5001/fingertips-beb3b/us-central1/api
+
+# Live Firebase
+@baseUrl = https://us-central1-fingertips-beb3b.cloudfunctions.net/api
+
+### Request 1 : Get a user whose correct 'login' and 'password' ### Purpose : To simulate the authentication process. GET {{baseUrl}}/users?login=alex&password=123
+
+### Request 2 : Get the counter data for a given user
+GET {{baseUrl}}/users?user=user1
+
+### Request 3 : Update the information of a given user id
+PUT {{baseUrl}}/users/tAkBGrJE2wWSwwYwLuO1
+Content-Type: application/json
+
+{
+    "user": "user1",
+    "login": "khp53"
+}
+
+### Request: Get all users
+GET {{baseUrl}}/users
+
+### Request: Add a new user
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "login": "maliha",
+    "photoUrl": "",
+    "password": "123",
+    "name": "Maliha Shahed",
+    "id": "user2"
+}
+
+### Request: Add a new org
+POST {{baseUrl}}/organizations
+Content-Type: application/json
+
+{
+    "id": "org1",
+    "name": "1 Takay Ahar",
+    "photoUrl": "https://scontent.fdac11-1.fna.fbcdn.net/v/t1.18169-9/15589662_1282896308440800_620042329396327502_n.png?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=peCTvs2VVE0AX8NT5ho&_nc_ht=scontent.fdac11-1.fna&oh=ec36b9b36bd8fbf5c5ea84376ba4b13b&oe=60D51E50",
+    "login": "1takaahar",
+    "password": "123",
+    "address": "Dhaka, Bangladesh",
+    "phoneNumber": "01812345678",
+    "email": "donate@1taka.ahar",
+    "coverPhotoUrl": "https://scontent.fdac11-1.fna.fbcdn.net/v/t1.6435-9/193582967_4190666404330428_5242186710776248081_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=e3f864&_nc_ohc=dZ_DG44tA_0AX8n3fIU&_nc_ht=scontent.fdac11-1.fna&oh=77ee1939845e8ee02811d54ac0a36825&oe=60D4304B"
+}
+
+### Request: Add a new org
+POST {{baseUrl}}/organizations
+Content-Type: application/json
+
+{
+    "id": "org2",
+    "name": "Biddanondo Foundation",
+    "photoUrl": "https://scontent.fdac11-1.fna.fbcdn.net/v/t31.18172-8/11696392_856367194398439_5132130584069968566_o.jpg?_nc_cat=1&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=HFodgTSuxSMAX8z1kQ5&_nc_ht=scontent.fdac11-1.fna&oh=3d122101e079145eb642be7dbc631fce&oe=60F4F695",
+    "login": "1takaahar",
+    "password": "123",
+    "address": "Dhaka, Bangladesh",
+    "phoneNumber": "01812345678",
+    "email": "donate@1taka.ahar",
+    "coverPhotoUrl": "https://scontent.fdac11-1.fna.fbcdn.net/v/t1.6435-9/186558205_3962882547080206_733194223476010755_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=e3f864&_nc_ohc=rZsSpe9wFn8AX_YAfD1&_nc_ht=scontent.fdac11-1.fna&oh=819f248ff148837078f39a827fef9776&oe=60D3C342"
+}
+
+### Request: Add a new user
+POST {{baseUrl}}/users/user1
+Content-Type: application/json
+
+{
+    "login": "karimul",
+    "photoUrl": "",
+    "password": "123",
+    "name": "MD Karimul Hasan",
+    "id": "user1"
+}
+
+### Request: Delete a user
+DELETE {{baseUrl}}/users/user2
+
+### Request: Get all the organization
+GET {{baseUrl}}/organizations
+
+### Request: patch a org data
+PATCH {{baseUrl}}/organizations/uP8ZD5WPBS2QWAA6qrJf
+Content-Type: application/json
+
+{
+    "tagLine": "A Meal For Everyone!"
+}
+
+### Request: patch a org data
+PATCH {{baseUrl}}/organizations/j6FSmNmQZtRKGGL9ak6c
+Content-Type: application/json
+
+{
+    "tagLine": "This Earth is There's As Well!"
+}
+
