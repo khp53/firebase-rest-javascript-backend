@@ -1,20 +1,42 @@
-const express = require('express')
+const _log = require('firebase-functions').logger.log
+
+const _express = require('express')
+const {verifyUserCanAccessResource, verifyAdminAccess} = require('./auths_controller')
 
 class Controller {
     constructor(model) {
         this.model = model
-        this.router = express.Router()
+        this.router = _express.Router()
+        
 
-        // Get all documents
+        // User can only access his/her document
+        this.router.use('/:id', verifyUserCanAccessResource)
+
+        // Get all Counter documents
+        // Attached with verifyAdminAccess middleware, so that only admin can access ALL documents
         this.router.get('/', async (req, res, next) => {
             try {
-                const result = await this.model.getDocumentList(req.query)
+                // _log('req.user', req.user)
+                
+                const result = await this.model.queryDocumentList(req.query)
                 return res.json(result)
             }
             catch (e) {
                 return next(e)
             }
         })
+
+        // Get all documents of organizations without adminacess token
+
+        // this.router.get('/', async (req, res, next) => {
+        //     try {
+        //         const result = await this.model.getDocumentList()
+        //         return res.json(result)
+        //     }
+        //     catch (e) {
+        //         return next(e)
+        //     }
+        // })
 
         // Get one document
         this.router.get('/:id', async (req, res, next) => {
@@ -28,11 +50,22 @@ class Controller {
             }
         })
 
-
         // Create / add a new document
         this.router.post('/', async (req, res, next) => {
             try {
                 const result = await this.model.createDocument(req.body)
+                if (!result) return res.sendStatus(409)
+                return res.status(201).json(result)
+            }
+            catch (e) {
+                return next(e)
+            }
+        })
+
+        // Create / add a new document with id
+        this.router.post('/:id', async (req, res, next) => {
+            try {
+                const result = await this.model.createDocument(req.body, req.params.id)
                 if (!result) return res.sendStatus(409)
                 return res.status(201).json(result)
             }

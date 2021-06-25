@@ -40,6 +40,7 @@ class Model {
 
     // Get all documents from the collection   
     async getDocumentList() {
+
         const documentRefList = await this.collectionRef.get()
         return this._documentRefListToList(documentRefList)
     }
